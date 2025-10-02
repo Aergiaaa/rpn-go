@@ -1,3 +1,3 @@
-module github.com/Aergiaaa/rpn_go
+module github.com/Aergiaaa/rpn-go
 
 go 1.25.1
