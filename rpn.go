@@ -55,15 +55,16 @@ func (r *RPN) PrintForm() (result string, err error) {
 				continue
 			}
 
-			if !r.Sop.IsEmpty() {
+			for !r.Sop.IsEmpty() {
 				v, err := popIfPriority(*r, str)
 				if err != nil {
 					return "", err
 				}
-				if v != nil {
-					r.Snum.Push(v)
-					continue
+				if v == nil {
+					break
 				}
+
+				r.Snum.Push(v)
 			}
 
 			r.Sop.Push(str)
