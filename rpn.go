@@ -29,7 +29,7 @@ type RPN struct {
 // The expr parameter is the mathematical expression in string format.
 // The function returns a pointer to the RPN struct and an error if any.
 func InitRPN(size int, expr string, capacity int) (*RPN, error) {
-	if len(expr) < 3 {
+	if len(expr) < 3 { // 3 is the minimum length for a valid expression (e.g., "1+1")
 		return nil, fmt.Errorf("error: invalid expression, expression not enough")
 	}
 	if !isFullBracket(expr) {
@@ -219,7 +219,7 @@ func (r *RPN) Calculate() (float64, error) {
 					return math.Inf(-1), err
 				}
 
-				newValue, err := op.CalculateString(val2Float, val1Float)
+				newValue, err := op.Calculate(val2Float, val1Float)
 				if err != nil {
 					return math.Inf(-1), err
 				}
@@ -255,7 +255,7 @@ func stringToAnyArray(s string) []any {
 
 	// Split the string into individual characters
 	aS := strings.Split(s, "")
-	var a []any
+	var res []any
 
 	// Iterate through the split string and convert each character to any type
 	// Skip empty strings or spaces
@@ -264,10 +264,10 @@ func stringToAnyArray(s string) []any {
 			continue
 		}
 
-		a = append(a, v)
+		res = append(res, v)
 	}
 
-	return a
+	return res
 }
 
 // anyToFloat converts an any type to a float64.

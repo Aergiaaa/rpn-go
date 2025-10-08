@@ -19,15 +19,6 @@ const (
 // It returns an error if the string does not match any known operand.
 // The operands are defined as follows:
 // ADD: "+", SUB: "-", MUL: "*", DIV: "/", LEFT_PARENTHESIS: "(", RIGHT_PARENTHESIS: ")"
-//
-// Example usage:
-//
-//	op, err := ToOperand("+")
-//	if err != nil {
-//	    fmt.Println(err)
-//	} else {
-//	    fmt.Println(op) // Output: ADD
-//	}
 func ToOperand(exp any) (Operand, error) {
 	switch exp {
 	case "+":
@@ -102,20 +93,10 @@ func (o Operand) String() string {
 // It returns the result of the operation or an error if the operation is invalid.
 // The operands are defined as follows:
 // ADD: addition, SUB: subtraction, MUL: multiplication, DIV: division
-//
-// Example usage:
-//
-//	result, err := ADD.CalculateString(3.0, 5.0)
-//	if err != nil {
-//	    fmt.Println(err)
-//	} else {
-//	    fmt.Println(result) // Output: 8.0
-//	}
-//
 // If division by zero is attempted, it returns an error.
 // If an unknown operand is used, it returns an error.
 // If the operand is not recognized, it returns an error.
-func (o Operand) CalculateString(a, b float64) (float64, error) {
+func (o Operand) Calculate(a, b float64) (float64, error) {
 	switch o {
 	case ADD:
 		return a + b, nil
